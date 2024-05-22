@@ -1,0 +1,62 @@
+"use client"
+
+import { usePathname } from "next/navigation"
+import { fetchUser } from "@/app/(auth)/(routes)/actions/fetchUsers"
+import { use, useEffect, useState } from "react"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
+import path from "path"
+import { error } from "console"
+
+function LayoutProvider ({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
+    const pathname = usePathname();
+    const isPuplicRoute = ["sign-in", "sign-up"].includes(
+        pathname.split("/")[1]
+    );
+
+    const getNavbar = () => {
+        if (isPuplicRoute) return null;
+        return <>{children}</>
+    };
+
+    const getContent = () => {
+        if (isPuplicRoute) return null;
+        return <>{children}</>
+    };
+
+    const getFooter = () => {
+        if (isPuplicRoute) return null;
+        return <>{children}</>
+    };
+
+    const getCurrentUser = async () => {
+        try{
+            const response:any = await fetchUser()
+            if (response.error)
+                throw new Error(response.error.message)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            return;
+        }
+    };
+
+    useEffect(() => {
+        if (!isPuplicRoute) getCurrentUser()
+    }, [])
+
+    return (
+        <div className="flex flex-col justify-between min-h-screen bg-secondary">
+            {getNavbar()}
+            {getContent()}
+            {getFooter()}
+        </div>
+    )
+}
+
+export default LayoutProvider;
+
