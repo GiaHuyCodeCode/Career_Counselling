@@ -7,9 +7,10 @@ import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import path from "path"
 import { error } from "console"
+import { Content } from "next/font/google"
 
 function LayoutProvider ({
-    children,
+    children
 }: {
     children: React.ReactNode;
 }) {
@@ -20,7 +21,7 @@ function LayoutProvider ({
 
     const getNavbar = () => {
         if (isPuplicRoute) return null;
-        return <>{children}</>
+        return <Navbar/>
     };
 
     const getContent = () => {
@@ -30,7 +31,7 @@ function LayoutProvider ({
 
     const getFooter = () => {
         if (isPuplicRoute) return null;
-        return <>{children}</>
+        return <Footer/>
     };
 
     const getCurrentUser = async () => {
@@ -50,7 +51,7 @@ function LayoutProvider ({
     }, [])
 
     return (
-        <div className="flex flex-col justify-between min-h-screen bg-secondary">
+        <div className="min-h-screen bg-secondary">
             {getNavbar()}
             {getContent()}
             {getFooter()}

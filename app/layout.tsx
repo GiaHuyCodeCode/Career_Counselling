@@ -20,9 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-    
     <html lang="en">
-      <body className={raleway.className}>
+      <body className={`s{raleway.className} min-h-screen`}>
         <LayoutProvider>
           {children}
         </LayoutProvider>
