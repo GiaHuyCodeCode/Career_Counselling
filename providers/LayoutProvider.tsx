@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import { fetchUser } from "@/app/(auth)/(routes)/actions/fetchUsers"
+import { fetchUsers } from "@/app/(auth)/(routes)/actions/fetchUsers"
 import { use, useEffect, useState } from "react"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
@@ -36,7 +36,7 @@ function LayoutProvider ({
 
     const getCurrentUser = async () => {
         try{
-            const response:any = await fetchUser()
+            const response:any = await fetchUsers()
             if (response.error)
                 throw new Error(response.error.message)
         } catch (error) {
