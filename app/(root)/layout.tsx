@@ -1,3 +1,4 @@
+import LayoutProvider from "@/providers/LayoutProvider";
 
 interface SetupLayoutProps{
     children: React.ReactNode;
@@ -5,9 +6,13 @@ interface SetupLayoutProps{
 
 const  SetupLayout= ({children}:SetupLayoutProps) => {
   return (
+    <LayoutProvider>
+
     <div>
       {children}
     </div>
+
+    </LayoutProvider>
   )
 }
 
